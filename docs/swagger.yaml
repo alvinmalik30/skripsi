@@ -1,0 +1,1558 @@
+basePath: /api/v1
+definitions:
+  dto.AppHandlingCostReq:
+    properties:
+      name:
+        type: string
+      nominal:
+        type: number
+      unit:
+        type: string
+    type: object
+  dto.AuthLoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.AuthRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+  dto.BiodataRequest:
+    properties:
+      date of birth:
+        type: string
+      full name:
+        type: string
+      job:
+        type: string
+      nik:
+        type: string
+      phone:
+        type: string
+      place of birth:
+        type: string
+      postal code:
+        type: string
+    type: object
+  dto.BiodataResponse:
+    properties:
+      date of birth:
+        type: string
+      full name:
+        type: string
+      id:
+        type: string
+      information:
+        type: string
+      is eglible:
+        type: boolean
+      job:
+        type: string
+      nik:
+        type: string
+      phone:
+        type: string
+      place of birth:
+        type: string
+      postal code:
+        type: string
+      status update:
+        type: boolean
+      user credential:
+        $ref: '#/definitions/dto.GetAuthResponse'
+    type: object
+  dto.Confirm:
+    properties:
+      id:
+        type: string
+      is payed:
+        type: boolean
+      status:
+        type: string
+    type: object
+  dto.DepositeInterestReq:
+    properties:
+      duration mounth:
+        type: integer
+      interest rate:
+        type: number
+      tax rate:
+        type: number
+    type: object
+  dto.DepositeInterestRequest:
+    properties:
+      duration mounth:
+        type: integer
+      id:
+        type: string
+      interest rate:
+        type: number
+      tax rate:
+        type: number
+    type: object
+  dto.DepositeRequest:
+    properties:
+      deposite amount:
+        type: integer
+      interest rate id:
+        type: string
+      user id:
+        type: string
+    type: object
+  dto.GetAuthResponse:
+    properties:
+      activated:
+        type: boolean
+      email:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+      va number:
+        type: string
+    type: object
+  dto.LatePaymentFeeReq:
+    properties:
+      name:
+        type: string
+      nominal:
+        type: number
+      unit:
+        type: string
+    type: object
+  dto.LoanInterest:
+    properties:
+      duration mounths:
+        type: integer
+      interest rate:
+        type: number
+    type: object
+  dto.LoanReq:
+    properties:
+      loan amount:
+        type: integer
+      loan handling cost id:
+        type: string
+      loan interest rate id:
+        type: string
+      loan late payment fess id:
+        type: string
+    type: object
+  dto.Paging:
+    properties:
+      Page:
+        type: integer
+      size:
+        type: integer
+      totalPages:
+        type: integer
+      totalRows:
+        type: integer
+    type: object
+  dto.ResponseData:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+  dto.ResponseMessage:
+    properties:
+      message:
+        type: string
+    type: object
+  dto.ResponsePaging:
+    properties:
+      data: {}
+      message:
+        type: string
+      paging:
+        $ref: '#/definitions/dto.Paging'
+    type: object
+  dto.TopUpReq:
+    properties:
+      top up amount:
+        type: integer
+    type: object
+  dto.TopUpupdate:
+    properties:
+      accepted status:
+        type: boolean
+      id:
+        type: string
+      information status:
+        type: string
+    type: object
+  dto.UpdateBioRequest:
+    properties:
+      eglibility:
+        type: boolean
+      information:
+        type: string
+      user credential id:
+        type: string
+    type: object
+  model.AppHandlingCost:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      nominal:
+        type: number
+      unit:
+        type: string
+    type: object
+  model.LatePaymentFee:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      nominal:
+        type: number
+      unit:
+        type: string
+    type: object
+  model.LoanInterest:
+    properties:
+      duration mounths:
+        type: integer
+      id:
+        type: string
+      interest rate:
+        type: number
+    type: object
+info:
+  contact: {}
+  title: Laundry Apps
+  version: "1.0"
+paths:
+  /apphandlingcost:
+    post:
+      consumes:
+      - application/json
+      description: Create New Apps Handling Cost Data
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data application handling cost
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AppHandlingCostReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: New Handling Cost
+      tags:
+      - Handling Cost
+    put:
+      consumes:
+      - application/json
+      description: Create New Apps Handling Cost Data
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data application handling cost
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.AppHandlingCost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: Update Handling Cost
+      tags:
+      - Handling Cost
+  /apphandlingcost/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Create New Apps Handling Cost Data
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id data
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: delete data Handling Cost
+      tags:
+      - Handling Cost
+  /apphandlingcost/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: get all Apps Handling Cost Data
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: Get all Handling Cost
+      tags:
+      - Handling Cost
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login for User
+      parameters:
+      - description: Data login user
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AuthLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: Login
+      tags:
+      - User
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register for User
+      parameters:
+      - description: Data registration user
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: Register
+      tags:
+      - User
+  /biodata:
+    get:
+      consumes:
+      - application/json
+      description: Get detail Biodata
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BiodataResponse'
+      summary: Detail Biodata User
+      tags:
+      - Biodata
+  /biodata/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: Do Update User Biodata
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: Get all data
+      tags:
+      - Biodata
+  /biodata/update:
+    put:
+      consumes:
+      - application/json
+      description: Do Update User Biodata
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: data biodata user
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BiodataRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: Update Biodata
+      tags:
+      - Biodata
+  /biodata/updated:
+    get:
+      consumes:
+      - application/json
+      description: Find User Which has Been Updated the Biodata
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: Find User Updated
+      tags:
+      - Biodata
+  /biodata/verified:
+    put:
+      consumes:
+      - application/json
+      description: Find User Which has Been Updated the Biodata
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: data vefication user
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateBioRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: Find User Updated
+      tags:
+      - Biodata
+  /deposite:
+    post:
+      consumes:
+      - application/json
+      description: Create New deposito Data
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data deposito
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DepositeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: New deposito
+      tags:
+      - Deposito
+  /deposite/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get deposito by id deposito
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Id deposito
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get deposito by id
+      tags:
+      - Deposito
+  /deposite/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: get all data deposito
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: Get all
+      tags:
+      - Deposito
+  /deposite/update:
+    put:
+      consumes:
+      - application/json
+      description: update data deposito
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: update
+      tags:
+      - Deposito
+  /deposite/user:
+    get:
+      consumes:
+      - application/json
+      description: Create New deposito Data
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get detail deposito user
+      tags:
+      - Deposito
+  /deposite/user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get deposito by id user
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Id ucredential user
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get deposito by id user
+      tags:
+      - Deposito
+  /depositeinterest:
+    post:
+      consumes:
+      - application/json
+      description: create new data deposito interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data deposite interest
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DepositeInterestReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: new
+      tags:
+      - deposito interest
+    put:
+      consumes:
+      - application/json
+      description: update data deposito interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data deposite interest
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DepositeInterestRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: update
+      tags:
+      - deposito interest
+  /depositeinterest/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete data deposito interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: delete
+      tags:
+      - deposito interest
+  /depositeinterest/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: get all data deposito interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: Get all
+      tags:
+      - deposito interest
+  /latepaymentfee:
+    post:
+      consumes:
+      - application/json
+      description: create new data late fee payment
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data late fee
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LatePaymentFeeReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: new
+      tags:
+      - late fee payment
+    put:
+      consumes:
+      - application/json
+      description: update data late fee payment
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data late fee
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.LatePaymentFee'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: update
+      tags:
+      - late fee payment
+  /latepaymentfee/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete data late fee payment
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: delete
+      tags:
+      - late fee payment
+  /latepaymentfee/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: get all data late fee payment
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: get all
+      tags:
+      - late fee payment
+  /loan:
+    post:
+      consumes:
+      - application/json
+      description: create new data loan
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data deposite interest
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoanReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: new
+      tags:
+      - loan
+  /loan/{id}:
+    get:
+      consumes:
+      - application/json
+      description: find by id data loan
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: find by id loan
+      tags:
+      - loan
+  /loan/confirm:
+    put:
+      consumes:
+      - application/json
+      description: confirm data uploaded
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data late fee
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Confirm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: confirm
+      tags:
+      - loan
+  /loan/installment/:id:
+    get:
+      consumes:
+      - application/json
+      description: find by id data loan
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: find by id installenment
+      tags:
+      - installenment loan
+  /loan/pay:
+    post:
+      consumes:
+      - multipart/form-data
+      description: upload recipe
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: ID parameter
+        in: formData
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: upload
+      tags:
+      - loan
+  /loan/updatedpayment:
+    get:
+      consumes:
+      - application/json
+      description: upload recipe
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: get data upoaded
+      tags:
+      - loan
+  /loan/updatelatefee:
+    get:
+      consumes:
+      - application/json
+      description: create update data late fee
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: update
+      tags:
+      - loan
+  /loaninterest:
+    post:
+      consumes:
+      - application/json
+      description: create new data loan interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data loan interest
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoanInterest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: new
+      tags:
+      - loan interest
+    put:
+      consumes:
+      - application/json
+      description: create update data loan interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data loan interest
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/model.LoanInterest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: update
+      tags:
+      - loan interest
+  /loaninterest/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: get all data loan interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: get all
+      tags:
+      - loan interest
+  /loaninterest/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: get all data loan interest
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: get all
+      tags:
+      - loan interest
+  /saldo:
+    get:
+      consumes:
+      - application/json
+      description: get by id data loan
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get by id installenment
+      tags:
+      - saldo
+  /saldo/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get by id data loan
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get by id installenment
+      tags:
+      - saldo
+  /saldo/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: get all data saldo
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: get all
+      tags:
+      - saldo
+  /topup:
+    post:
+      consumes:
+      - application/json
+      description: create new data topup
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data topup
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TopUpReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: new
+      tags:
+      - topup
+  /topup/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get data top up by id data
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get by id data
+      tags:
+      - topup
+  /topup/confirm:
+    get:
+      consumes:
+      - application/json
+      description: get updated data topup
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get data updated
+      tags:
+      - topup
+    put:
+      consumes:
+      - application/json
+      description: confirm data topup
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Data top up
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TopUpupdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: confirm
+      tags:
+      - topup
+  /topup/list/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: get all data saldo
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: get all
+      tags:
+      - topup
+  /topup/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: upload recipe
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: ID parameter
+        in: formData
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseMessage'
+      summary: upload
+      tags:
+      - topup
+  /topup/user:
+    get:
+      consumes:
+      - application/json
+      description: get data top up by user login
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get by user login
+      tags:
+      - topup
+  /topup/user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get data top up by user id
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponseData'
+      summary: get by id user
+      tags:
+      - topup
+  /user/{page}/{size}:
+    get:
+      consumes:
+      - application/json
+      description: Getting All User
+      parameters:
+      - default: Bearer <token>
+        description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page of pagination
+        in: path
+        name: page
+        required: true
+        type: integer
+      - description: size of pagination
+        in: path
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ResponsePaging'
+      summary: Get All User
+      tags:
+      - User
+schemes:
+- http
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
